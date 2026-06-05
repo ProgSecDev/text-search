@@ -1,4 +1,5 @@
 import { useState, useMemo, useCallback } from 'react';
+import './TextSearch.css';
 
 
 const PARAGRAPHS = [
@@ -15,16 +16,13 @@ const PARAGRAPHS = [
     }
 ];
 
+const escapeRegex = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
 function HighlightedText({ text, request }) {
-    if (!request.trim()) {
-        return
-        <>
-            {text}
-        </>;
-        const regex = new RegExp(`(${request.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`, "gi");
-        const parts = text.split(regex);
+    if (!request.trim()) return<>{text}</>;
 
+        const regex = new RegExp(`(${escapeRegex(request)})`, "gi");
+        const parts = text.split(regex);
 
         return (
             <>
@@ -39,25 +37,25 @@ function HighlightedText({ text, request }) {
                 )}
             </>
         );
-    }
+}
 
 
-    function Paragraphs({ paragraph, request }) {
+function Paragraphs({ paragraph, request }) {
         return (
             <article className='parag'>
                 <h2 className='parag-title'>
-                    <HighlightT text={paragraph.title} request={request} />
+                    <HighlightedText text={paragraph.title} request={request} />
                 </h2>
                 <time className='parag-date'>{paragraph.date}</time>
                 <p className='parag-body'>
-                    <HighlightT text={paragraph.body} request={request} />
+                    <HighlightedText text={paragraph.body} request={request} />
                 </p>
             </article>
         );
     }
 
 
-    export default function Search() {
+export default function Search() {
         const [request, setRequest] = useState("");
 
 
@@ -66,26 +64,22 @@ function HighlightedText({ text, request }) {
             if (!r)
                 return PARAGRAPHS;
             return PARAGRAPHS.filter(
-                (a) => a.title.toLowerCase().includes(r) || a.body.toLowerCase().includes(r)
+                (p) => p.title.toLowerCase().includes(r) || p.body.toLowerCase().includes(r)
             );
         }, [request]);
 
 
         const handleClear = useCallback(() => setRequest(""), []);
-        const resultLabel = results.length === 0 ? "No posts found." : results.length === 1 ? "1 post was found." : `${results.length} posts were found.`;
-
-
+        
         return (
-            <>
                 <div className='app'>
                     <header className='header'>
                         <h1>Search Paragraphs</h1>
                         <p>Find posts by keywords - matches are highlighted instantly.</p>
                     </header>
 
-
                     <div className='search-wrap'>
-                        <span className='search-icon'></span>
+                        <span className='search-icon'>O</span>
                         <input
                             className='search-input'
                             type='text'
@@ -94,7 +88,7 @@ function HighlightedText({ text, request }) {
                             onChange={(e) => setRequest(e.target.value)}
                             autoFocus
                         />
-                        {query && (
+                        {request && (
                             <button className='clear-btn' onClick={handleClear} aria-label='Clear Search'>
                                 X
                             </button>
@@ -115,7 +109,7 @@ function HighlightedText({ text, request }) {
 
                     {results.length === 0 ? (
                         <div className='empty'>
-                            <div className='empty-icon'></div>
+                            <div className='empty-icon'>OO</div>
                             <p>No paragraphs match your search. Try a different keyword</p>
                         </div>
                     ) : (
@@ -124,7 +118,5 @@ function HighlightedText({ text, request }) {
                         ))
                     )}
                 </div>
-            </>
         );
     }
-}

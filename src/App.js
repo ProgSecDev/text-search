@@ -1,29 +1,15 @@
 // src/App.js
 import React from "react";
-import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
-
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
+import Search from "./Components/TextSearch.jsx";
 
-const AppContent = () => {
-  const location = useLocation();
-
-  
-
-  return (
-    <>
+const App = () => (
+    <Router basename="/ProgSecDev/text-search">
       <Routes>
-        <Route path="/" />
+      <Route path="/" element={<Search />} />
       </Routes>
-    </>
-  );
-};
-
-const App = () => {
-  return (
-    <Router>
-      <AppContent />
     </Router>
   );
-};
 
 export default App;

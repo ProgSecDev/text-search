@@ -1,16 +1,3 @@
-@font-face {
-    font-family: 'SilverForteGrungeGrunge';
-    src: url('./font/SilverForteGrunge.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-@font-face {
-    font-family: 'Aldhabi';
-    src: url('./font/Aldhabi.ttf') format('opentype');
-    font-weight: normal;
-    font-style: normal;
-}
-
 @import url('https://fonts.googleapis.com/css2?family=Allura&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Calibri&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bookman+Old+Style&display=swap');

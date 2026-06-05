@@ -1,8 +1,8 @@
 {
-  "name": "five-trees",
+  "name": "text-search",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://www.fivetrees-cy.com",
+  "homepage": "http://localhost:3001/ProgSecDev/text-search",
   "dependencies": {
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@fortawesome/react-fontawesome": "^0.2.2",
